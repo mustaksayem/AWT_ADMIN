@@ -26,8 +26,8 @@ let AdminController = class AdminController {
     getallUser() {
         return this.adminService.getallUser();
     }
-    getUser(id) {
-        return this.adminService.getUser(id);
+    getUserByid(id) {
+        return this.adminService.getUserByid(id);
     }
     SearchUser(id) {
         return this.adminService.searchUser(id);
@@ -40,9 +40,6 @@ let AdminController = class AdminController {
     }
     addcustomer(dto) {
         return this.adminService.addcustomer(dto);
-    }
-    getcustomer(number) {
-        return this.adminService.getUser(number);
     }
     Searccustomer(number) {
         return this.adminService.searchcustomer(number);
@@ -77,7 +74,7 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Object)
-], AdminController.prototype, "getUser", null);
+], AdminController.prototype, "getUserByid", null);
 __decorate([
     (0, common_1.Get)("/searchuser/:id"),
     __param(0, (0, common_1.Param)("id")),
@@ -107,13 +104,6 @@ __decorate([
     __metadata("design:paramtypes", [admin_dto_1.CustomerDto]),
     __metadata("design:returntype", Object)
 ], AdminController.prototype, "addcustomer", null);
-__decorate([
-    (0, common_1.Get)("/:number"),
-    __param(0, (0, common_1.Param)("number")),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", Object)
-], AdminController.prototype, "getcustomer", null);
 __decorate([
     (0, common_1.Get)("/searchcustomer/:number"),
     __param(0, (0, common_1.Param)("number")),

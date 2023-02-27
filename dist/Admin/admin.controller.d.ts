@@ -5,12 +5,11 @@ export declare class AdminController {
     constructor(adminService: AdminService);
     insert(user: AdminDto): any;
     getallUser(): string;
-    getUser(id: number): any;
+    getUserByid(id: number): any;
     SearchUser(id: number): any;
     updateUser(id: number): any;
     delteteUser(id: number): any;
     addcustomer(dto: CustomerDto): any;
-    getcustomer(number: string): any;
     Searccustomer(number: string): string;
     updatecustomer(number: string): string;
     deltetecustomer(number: string): string;

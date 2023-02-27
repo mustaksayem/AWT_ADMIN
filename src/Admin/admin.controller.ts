@@ -18,8 +18,8 @@ export class AdminController {
     return this.adminService.getallUser();
   }
   @Get("/:id")
-  getUser(@Param("id" ,ParseIntPipe) id:number): any {
-    return this.adminService.getUser(id);
+  getUserByid(@Param("id" ,ParseIntPipe) id:number): any {
+    return this.adminService.getUserByid(id);
   }
   @Get("/searchuser/:id")
   SearchUser(@Param ("id") id:number): any {
@@ -44,10 +44,10 @@ export class AdminController {
   }
 
   
-  @Get("/:number")
-  getcustomer(@Param("number") number:string): any {
-    return this.adminService.getUser(number);
-  }
+  // @Get("/:number")
+  // getcustomer(@Param("number") number:string): any {
+  //   return this.adminService.getUser(number);
+  // }
   @Get("/searchcustomer/:number")
   Searccustomer(@Param ("number") number:string): string {
     return this.adminService.searchcustomer(number);

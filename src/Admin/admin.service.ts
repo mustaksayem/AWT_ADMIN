@@ -15,11 +15,11 @@ export class AdminService {
  
   
 
-      insert(user:AdminDto) {
+    insert(user:AdminDto) {
     return this.adminRepo.save(user);
   }
-  getUser(id): any {
-    return "Get single  user id is : "+id;
+  getUserByid(id) {
+    return this.adminRepo.findOneBy({id})
   }
   getallUser(  ): any {
     return "Get all user ";

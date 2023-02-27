@@ -5,7 +5,7 @@ export declare class AdminService {
     private adminRepo;
     constructor(adminRepo: Repository<AdminEntity>);
     insert(user: AdminDto): Promise<AdminDto & AdminEntity>;
-    getUser(id: any): any;
+    getUserByid(id: any): Promise<AdminEntity>;
     getallUser(): any;
     searchUser(id: any): any;
     updateUSer(id: any): any;

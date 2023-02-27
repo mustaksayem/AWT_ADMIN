@@ -24,8 +24,8 @@ let AdminService = class AdminService {
     insert(user) {
         return this.adminRepo.save(user);
     }
-    getUser(id) {
-        return "Get single  user id is : " + id;
+    getUserByid(id) {
+        return this.adminRepo.findOneBy({ id });
     }
     getallUser() {
         return "Get all user ";
