@@ -20,8 +20,8 @@ let AdminController = class AdminController {
     constructor(adminService) {
         this.adminService = adminService;
     }
-    adduser(dto) {
-        return this.adminService.adduser(dto);
+    insert(user) {
+        return this.adminService.insert(user);
     }
     getallUser() {
         return this.adminService.getallUser();
@@ -64,7 +64,7 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [admin_dto_1.AdminDto]),
     __metadata("design:returntype", Object)
-], AdminController.prototype, "adduser", null);
+], AdminController.prototype, "insert", null);
 __decorate([
     (0, common_1.Get)("alluser"),
     __metadata("design:type", Function),

@@ -1,6 +1,10 @@
+import { Repository } from 'typeorm';
 import { AdminDto, CustomerDto } from './admin.dto';
+import { AdminEntity } from './admin.entity';
 export declare class AdminService {
-    adduser(add: AdminDto): any;
+    private adminRepo;
+    constructor(adminRepo: Repository<AdminEntity>);
+    insert(user: AdminDto): Promise<AdminDto & AdminEntity>;
     getUser(id: any): any;
     getallUser(): any;
     searchUser(id: any): any;

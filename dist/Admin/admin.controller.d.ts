@@ -3,7 +3,7 @@ import { AdminService } from './admin.service';
 export declare class AdminController {
     private readonly adminService;
     constructor(adminService: AdminService);
-    adduser(dto: AdminDto): any;
+    insert(user: AdminDto): any;
     getallUser(): string;
     getUser(id: number): any;
     SearchUser(id: number): any;

@@ -1,15 +1,22 @@
 import { Body, Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { AdminDto, CustomerDto } from './admin.dto';
+import { AdminEntity } from './admin.entity';
 
 @Injectable()
 export class AdminService {
  
- 
+  constructor(
+     @InjectRepository(AdminEntity)
+      private adminRepo: Repository<AdminEntity>,
+      
+      ){}
  
   
 
-  adduser(add:AdminDto): any {
-    return "Name is :"+add.Name+" ; Id is  : "+add.id+ " and , location is : " + add.location;
+      insert(user:AdminDto) {
+    return this.adminRepo.save(user);
   }
   getUser(id): any {
     return "Get single  user id is : "+id;

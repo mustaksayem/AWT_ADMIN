@@ -9,8 +9,8 @@ export class AdminController {
  
   @Post("/adduser")
   @UsePipes(new ValidationPipe)
-  adduser(@Body() dto:AdminDto):any {
-    return this.adminService.adduser(dto);
+  insert(@Body() user:AdminDto):any {
+    return this.adminService.insert(user);
   }
 
    @Get("alluser")
