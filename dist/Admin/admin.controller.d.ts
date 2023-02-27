@@ -4,7 +4,7 @@ export declare class AdminController {
     private readonly adminService;
     constructor(adminService: AdminService);
     insert(user: AdminDto): any;
-    getallUser(): string;
+    getallUser(): any;
     getUserByid(id: number): any;
     SearchUser(id: number): any;
     updateUser(id: number): any;

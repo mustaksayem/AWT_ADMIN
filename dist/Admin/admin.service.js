@@ -28,7 +28,7 @@ let AdminService = class AdminService {
         return this.adminRepo.findOneBy({ id });
     }
     getallUser() {
-        return "Get all user ";
+        return this.adminRepo.find();
     }
     searchUser(id) {
         return "search the user " + id;

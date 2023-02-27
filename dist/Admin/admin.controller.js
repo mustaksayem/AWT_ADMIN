@@ -66,7 +66,7 @@ __decorate([
     (0, common_1.Get)("alluser"),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
-    __metadata("design:returntype", String)
+    __metadata("design:returntype", Object)
 ], AdminController.prototype, "getallUser", null);
 __decorate([
     (0, common_1.Get)("/:id"),

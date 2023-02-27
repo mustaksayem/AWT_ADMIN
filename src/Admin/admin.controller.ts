@@ -14,7 +14,7 @@ export class AdminController {
   }
 
    @Get("alluser")
-  getallUser(): string {
+  getallUser(): any {
     return this.adminService.getallUser();
   }
   @Get("/:id")

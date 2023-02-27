@@ -22,7 +22,7 @@ export class AdminService {
     return this.adminRepo.findOneBy({id})
   }
   getallUser(  ): any {
-    return "Get all user ";
+    return  this.adminRepo.find();
   }
   searchUser(id):any { 
     return "search the user "+id;
