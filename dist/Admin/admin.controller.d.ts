@@ -7,8 +7,8 @@ export declare class AdminController {
     getallUser(): any;
     getUserByid(id: number): any;
     SearchUser(id: number): any;
-    updateUser(id: number): any;
-    delteteUser(id: number): any;
+    updateUser(Name: string, location: string, id: number): any;
+    deleteUserById(id: number): any;
     addcustomer(dto: CustomerDto): any;
     Searccustomer(number: string): string;
     updatecustomer(number: string): string;

@@ -7,9 +7,9 @@ export declare class AdminService {
     insert(user: AdminDto): Promise<AdminDto & AdminEntity>;
     getUserByid(id: any): Promise<AdminEntity>;
     getallUser(): any;
-    searchUser(id: any): any;
-    updateUSer(id: any): any;
-    deleteUser(id: any): any;
+    searchUser(id: any): Promise<AdminEntity>;
+    updateUSer(Name: any, location: any, id: any): any;
+    deleteUserById(id: any): Promise<import("typeorm").DeleteResult>;
     addcustomer(add: CustomerDto): any;
     getcustomer(number: any): any;
     searchcustomer(number: any): any;

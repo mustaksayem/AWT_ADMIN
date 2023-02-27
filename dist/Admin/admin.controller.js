@@ -32,11 +32,11 @@ let AdminController = class AdminController {
     SearchUser(id) {
         return this.adminService.searchUser(id);
     }
-    updateUser(id) {
-        return this.adminService.updateUSer(id);
+    updateUser(Name, location, id) {
+        return this.adminService.updateUSer(Name, location, id);
     }
-    delteteUser(id) {
-        return this.adminService.deleteUser(id);
+    deleteUserById(id) {
+        return this.adminService.deleteUserById(id);
     }
     addcustomer(dto) {
         return this.adminService.addcustomer(dto);
@@ -77,16 +77,19 @@ __decorate([
 ], AdminController.prototype, "getUserByid", null);
 __decorate([
     (0, common_1.Get)("/searchuser/:id"),
-    __param(0, (0, common_1.Param)("id")),
+    __param(0, (0, common_1.Param)("id", common_1.ParseIntPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Object)
 ], AdminController.prototype, "SearchUser", null);
 __decorate([
     (0, common_1.Put)("/updateuser/:id"),
-    __param(0, (0, common_1.Param)("id")),
+    (0, common_1.UsePipes)(new common_1.ValidationPipe),
+    __param(0, (0, common_1.Body)("Name")),
+    __param(1, (0, common_1.Body)("location")),
+    __param(2, (0, common_1.Body)("id")),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
+    __metadata("design:paramtypes", [String, String, Number]),
     __metadata("design:returntype", Object)
 ], AdminController.prototype, "updateUser", null);
 __decorate([
@@ -95,7 +98,7 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Object)
-], AdminController.prototype, "delteteUser", null);
+], AdminController.prototype, "deleteUserById", null);
 __decorate([
     (0, common_1.Post)("/addcustomer"),
     (0, common_1.UsePipes)(new common_1.ValidationPipe),

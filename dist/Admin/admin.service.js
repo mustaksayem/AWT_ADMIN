@@ -31,13 +31,13 @@ let AdminService = class AdminService {
         return this.adminRepo.find();
     }
     searchUser(id) {
-        return "search the user " + id;
+        return this.adminRepo.findOneBy({ id });
     }
-    updateUSer(id) {
-        return "update user " + id;
+    updateUSer(Name, location, id) {
+        return this.adminRepo.update(id, { Name: Name, location: location });
     }
-    deleteUser(id) {
-        return "delete user " + id;
+    deleteUserById(id) {
+        return this.adminRepo.delete(id);
     }
     addcustomer(add) {
         return "Name is :" + add.Name + "  and Numbner is : " + add.number;
@@ -49,7 +49,7 @@ let AdminService = class AdminService {
         return "search the customer " + number;
     }
     updatecustomer(number) {
-        return "update customer " + number;
+        return;
     }
     deletecustomer(number) {
         return "delete customer " + number;

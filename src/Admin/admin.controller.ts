@@ -22,19 +22,25 @@ export class AdminController {
     return this.adminService.getUserByid(id);
   }
   @Get("/searchuser/:id")
-  SearchUser(@Param ("id") id:number): any {
+  SearchUser(@Param ("id",ParseIntPipe) id:number): any {
     return this.adminService.searchUser(id);
   }
   @Put("/updateuser/:id")
-  updateUser(@Param ("id") id:number):any{
-    return this.adminService.updateUSer(id);
+  @UsePipes(new ValidationPipe)
+  updateUser(
+    
+    @Body ("Name") Name:string,
+    @Body ("location") location:string,
+    @Body ("id") id:number
+    ):any{
+    return this.adminService.updateUSer(Name,location,id);
   }
   @Delete("/deleteuser/:id")
-  delteteUser(@Param ("id") id:number):any{
-    return this.adminService.deleteUser(id);
+  deleteUserById(@Param ("id") id:number):any{
+    return this.adminService.deleteUserById(id);
   
   }
-
+// done
 
 
   @Post("/addcustomer")

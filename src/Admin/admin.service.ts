@@ -24,15 +24,17 @@ export class AdminService {
   getallUser(  ): any {
     return  this.adminRepo.find();
   }
-  searchUser(id):any { 
-    return "search the user "+id;
+  searchUser(id) { 
+    return this.adminRepo.findOneBy({id})
   }
-  updateUSer(id):any{
-    return "update user "+id;
+  updateUSer(Name,location,id):any{
+    return this.adminRepo.update(id,{Name:Name,location:location})
   }
-  deleteUser(id):any{
-    return "delete user "+id;
+  deleteUserById(id){
+    return this.adminRepo.delete(id)
   }
+
+  // done
 
 
 
@@ -49,7 +51,7 @@ export class AdminService {
     return "search the customer "+number;
   }
   updatecustomer(number):any{
-    return "update customer "+number;
+    return 
   }
   deletecustomer(number):any{
     return "delete customer "+number;
