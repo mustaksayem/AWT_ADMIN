@@ -12,23 +12,29 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ProductService = void 0;
+exports.CustomerService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
-const product_entity_1 = require("../entitys/product.entity");
-let ProductService = class ProductService {
-    constructor(productRepo) {
-        this.productRepo = productRepo;
+const customer_entity_1 = require("../entitys/customer.entity");
+let CustomerService = class CustomerService {
+    constructor(customerRepo) {
+        this.customerRepo = customerRepo;
     }
-    async AddProduct(product) {
-        return this.productRepo.save(product);
+    getCustomerByid(id) {
+        return this.customerRepo.findOneBy({ id });
+    }
+    getallCustomer() {
+        return this.customerRepo.find();
+    }
+    searchCustomer(id) {
+        return this.customerRepo.findOneBy({ id });
     }
 };
-ProductService = __decorate([
+CustomerService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, typeorm_1.InjectRepository)(product_entity_1.ProductEntity)),
+    __param(0, (0, typeorm_1.InjectRepository)(customer_entity_1.CustomerEntity)),
     __metadata("design:paramtypes", [typeorm_2.Repository])
-], ProductService);
-exports.ProductService = ProductService;
-//# sourceMappingURL=product.service.js.map
+], CustomerService);
+exports.CustomerService = CustomerService;
+//# sourceMappingURL=customer.service.js.map

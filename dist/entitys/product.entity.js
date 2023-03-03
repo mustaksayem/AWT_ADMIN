@@ -28,11 +28,15 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], ProductEntity.prototype, "category", void 0);
+], ProductEntity.prototype, "Category", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], ProductEntity.prototype, "Description", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", String)
+], ProductEntity.prototype, "Image", void 0);
 ProductEntity = __decorate([
     (0, typeorm_1.Entity)("Products")
 ], ProductEntity);

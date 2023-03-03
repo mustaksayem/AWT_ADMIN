@@ -8,81 +8,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductController = void 0;
 const common_1 = require("@nestjs/common");
-const product_dto_1 = require("../DOTs/product.dto");
 const product_service_1 = require("../Services/product.service");
 let ProductController = class ProductController {
     constructor(adminService) {
         this.adminService = adminService;
     }
-    insert(user) {
-        return this.adminService.insert(user);
-    }
-    getallUser() {
-        return this.adminService.getallUser();
-    }
-    getUserByid(id) {
-        return this.adminService.getUserByid(id);
-    }
-    SearchUser(id) {
-        return this.adminService.searchUser(id);
-    }
-    updateUser(Name, location, id) {
-    }
-    deleteUserById(id) {
-        return this.adminService.deleteUserById(id);
-    }
 };
-__decorate([
-    (0, common_1.Post)("/adduser"),
-    (0, common_1.UsePipes)(new common_1.ValidationPipe),
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [product_dto_1.ProductDto]),
-    __metadata("design:returntype", Object)
-], ProductController.prototype, "insert", null);
-__decorate([
-    (0, common_1.Get)("alluser"),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Object)
-], ProductController.prototype, "getallUser", null);
-__decorate([
-    (0, common_1.Get)("/:id"),
-    __param(0, (0, common_1.Param)("id", common_1.ParseIntPipe)),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
-    __metadata("design:returntype", Object)
-], ProductController.prototype, "getUserByid", null);
-__decorate([
-    (0, common_1.Get)("/searchuser/:id"),
-    __param(0, (0, common_1.Param)("id", common_1.ParseIntPipe)),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
-    __metadata("design:returntype", Object)
-], ProductController.prototype, "SearchUser", null);
-__decorate([
-    (0, common_1.Put)("/updateuser/:id"),
-    (0, common_1.UsePipes)(new common_1.ValidationPipe),
-    __param(0, (0, common_1.Body)("Name")),
-    __param(1, (0, common_1.Body)("location")),
-    __param(2, (0, common_1.Body)("id")),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, String, Number]),
-    __metadata("design:returntype", Object)
-], ProductController.prototype, "updateUser", null);
-__decorate([
-    (0, common_1.Delete)("/deleteuser/:id"),
-    __param(0, (0, common_1.Param)("id")),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
-    __metadata("design:returntype", Object)
-], ProductController.prototype, "deleteUserById", null);
 ProductController = __decorate([
     (0, common_1.Controller)('admin'),
     __metadata("design:paramtypes", [product_service_1.ProductService])

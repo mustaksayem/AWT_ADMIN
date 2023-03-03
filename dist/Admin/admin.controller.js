@@ -20,9 +20,12 @@ const admin_dto_1 = require("../DOTs/admin.dto");
 const admin_service_1 = require("../Services/admin.service");
 const session_guard_1 = require("./session.guard");
 const multer_1 = require("multer");
+const product_dto_1 = require("../DOTs/product.dto");
+const product_service_1 = require("../Services/product.service");
 let AdminController = class AdminController {
-    constructor(adminService) {
+    constructor(adminService, productService) {
         this.adminService = adminService;
+        this.productService = productService;
     }
     getProfile(session) {
         console.log(session.Email);
@@ -41,6 +44,10 @@ let AdminController = class AdminController {
         else {
             return { message: "login  faild" };
         }
+    }
+    AddProduct(productDto, file) {
+        productDto.Image = file.filename;
+        return this.productService.AddProduct(productDto);
     }
 };
 __decorate([
@@ -80,12 +87,32 @@ __decorate([
     __metadata("design:paramtypes", [Object, admin_dto_1.AdminDto]),
     __metadata("design:returntype", void 0)
 ], AdminController.prototype, "signin", null);
+__decorate([
+    (0, common_1.Post)("/addProduct"),
+    (0, decorators_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('file', {
+        storage: (0, multer_1.diskStorage)({
+            destination: './uploads',
+            filename: function (req, file, cb) {
+                cb(null, Date.now() + file.originalname);
+            }
+        })
+    })),
+    (0, common_1.UsePipes)(new common_1.ValidationPipe),
+    __param(0, (0, common_1.Body)()),
+    __param(1, (0, decorators_1.UploadedFile)(new common_1.ParseFilePipe({
+        validators: [
+            new common_1.MaxFileSizeValidator({ maxSize: 160000000 }),
+            new common_1.FileTypeValidator({ fileType: 'png|jpg|jpeg|' }),
+        ],
+    }))),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [product_dto_1.ProductDto, Object]),
+    __metadata("design:returntype", void 0)
+], AdminController.prototype, "AddProduct", null);
 AdminController = __decorate([
     (0, common_1.Controller)('admin'),
-    __metadata("design:paramtypes", [admin_service_1.AdminService])
+    __metadata("design:paramtypes", [admin_service_1.AdminService,
+        product_service_1.ProductService])
 ], AdminController);
 exports.AdminController = AdminController;
-function moment() {
-    throw new Error('Function not implemented.');
-}
 //# sourceMappingURL=admin.controller.js.map

@@ -11,10 +11,12 @@ export class ProductEntity extends BaseEntity{
     Price:number
 
     @Column()
-    category:string
+    Category:string
 
     @Column()
     Description:string
+    @Column({ nullable: true })
+    Image:string
     
 
 

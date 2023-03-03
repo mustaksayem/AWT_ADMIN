@@ -36,11 +36,20 @@ let AdminService = class AdminService {
         const data = await this.adminRepo.findOneBy({ Email: admindto.Email });
         const isMatch = await bcrypt.compare(admindto.Password, data.Password);
         if (isMatch) {
-            return data.Email;
+            return data.id;
         }
         else {
             return 0;
         }
+    }
+    getUserByid(id) {
+        return this.adminRepo.findOneBy({ id });
+    }
+    getallUser() {
+        return this.adminRepo.find();
+    }
+    searchUser(id) {
+        return this.adminRepo.findOneBy({ id });
     }
 };
 AdminService = __decorate([

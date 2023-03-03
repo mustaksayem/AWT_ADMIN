@@ -18,6 +18,7 @@ export class AdminDto{
     @IsString({message:"Location must be String"})
     location:string;
     fileName: string;
+  static Name: string;
 
 
 }

@@ -19,11 +19,6 @@ __decorate([
     __metadata("design:type", String)
 ], ProductDto.prototype, "Name", void 0);
 __decorate([
-    (0, class_validator_1.IsNotEmpty)({ message: "Enter your price " }),
-    (0, class_validator_1.IsNumber)(),
-    __metadata("design:type", Number)
-], ProductDto.prototype, "Price", void 0);
-__decorate([
     (0, class_validator_1.IsNotEmpty)({ message: "Enter your Category" }),
     (0, class_validator_1.IsString)({ message: "Category must be String" }),
     __metadata("design:type", String)

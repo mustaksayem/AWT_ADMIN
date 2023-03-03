@@ -15,28 +15,31 @@ export class ProductService {
  
   constructor(
      @InjectRepository(ProductEntity)
-      private adminRepo: Repository<ProductEntity>,
+      private productRepo: Repository<ProductEntity>,
       
       ){}
  
   
+     async AddProduct(product:ProductDto) {
+    return this.productRepo.save(product);
+     }
+      // getCustomerByid(id) {
+      //   return this.productRepo.findOneBy({id})
+      // }
+      // getallCustomer(  ): any {
+      //   return  this.productRepo.find();
+      // }
+      // searchCustomer(id) { 
+      //   return this.productRepo.findOneBy({id})
+      // }
 
-    insert(user:ProductDto) {
-    return this.adminRepo.save(user);
-  }
-  getUserByid(id) {
-    return this.adminRepo.findOneBy({id})
-  }
-  getallUser(  ): any {
-    return  this.adminRepo.find();
-  }
-  searchUser(id) { 
-    return this.adminRepo.findOneBy({id})
-  }
- 
-  deleteUserById(id){
-    return this.adminRepo.delete(id)
-  }
+      // async insert(adminDto :AdminDto){
+
+      //   const salt =await bcrypt.genSalt();
+      //   const hasse =await bcrypt .hash(adminDto.Password,salt);
+      //   adminDto.Password=hasse;
+      //   return this.adminRepo.save(adminDto);
+      // }
 
   // done
 

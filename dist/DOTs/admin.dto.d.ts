@@ -5,4 +5,5 @@ export declare class AdminDto {
     Email: string;
     location: string;
     fileName: string;
+    static Name: string;
 }

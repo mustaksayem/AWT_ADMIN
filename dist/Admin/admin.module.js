@@ -13,13 +13,15 @@ const admin_controller_1 = require("./admin.controller");
 const admin_entity_1 = require("../entitys/admin.entity");
 const admin_service_1 = require("../Services/admin.service");
 const customer_entity_1 = require("../entitys/customer.entity");
+const product_entity_1 = require("../entitys/product.entity");
+const product_service_1 = require("../Services/product.service");
 let AdminModule = class AdminModule {
 };
 AdminModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([admin_entity_1.AdminEntity, customer_entity_1.CustomerEntity])],
+        imports: [typeorm_1.TypeOrmModule.forFeature([admin_entity_1.AdminEntity, customer_entity_1.CustomerEntity, product_entity_1.ProductEntity])],
         controllers: [admin_controller_1.AdminController],
-        providers: [admin_service_1.AdminService],
+        providers: [admin_service_1.AdminService, product_service_1.ProductService],
     })
 ], AdminModule);
 exports.AdminModule = AdminModule;

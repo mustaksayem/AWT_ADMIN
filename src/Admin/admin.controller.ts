@@ -11,12 +11,21 @@ import * as fs from 'fs';
 import { Request, Response } from 'express';
 import { diskStorage } from 'multer';
 import session from 'express-session';
+import { CustomerService } from 'src/Services/customer.service';
+import { ProductDto } from 'src/DOTs/product.dto';
+import { ProductService } from 'src/Services/product.service';
 
 
 
 @Controller('admin')
 export class AdminController {
-  constructor(private readonly adminService: AdminService) { }
+  //customerCervice: any;
+  
+  //constructor(private readonly productServices: ProductService),
+  constructor(
+    private readonly adminService: AdminService,
+    private readonly productService: ProductService
+  ) { }
 
 
   // @UseGuards(SessionGuard)
@@ -86,23 +95,48 @@ else
 
 
 
-  //   @Post("/adduser")
-  //   @UsePipes(new ValidationPipe)
-  //   insert(@Body() user:AdminDto):any {
-  //     return this.adminService.insert(user);
-  //   }
+    @Post("/addProduct")
+    @UseInterceptors(FileInterceptor('file', 
+    {
+      storage: diskStorage({
+        destination: './uploads',
+        filename: function (req, file, cb) {
+          cb(null, Date.now() + file.originalname)
+        }
+      })
 
-  //    @Get("alluser")
+    }))
+    @UsePipes(new ValidationPipe)
+    // AddProduct(@Body() product:ProductDto):any {
+    //   return this.productService.AddProduct(product);
+    // }
+
+    AddProduct(@Body() productDto: ProductDto, @UploadedFile(new ParseFilePipe({
+      validators: [
+        new MaxFileSizeValidator({ maxSize: 160000000 }),
+        new FileTypeValidator({ fileType: 'png|jpg|jpeg|' }),
+      ],
+    }),) file: Express.Multer.File) {
+  
+      productDto.Image = file.filename;
+  
+      return this.productService.AddProduct(productDto);
+      //console.log(file)
+    }
+  // @UseGuards(SessionGuard)
+  //    @Get("allcustomer")
   //   getallUser(): any {
-  //     return this.adminService.getallUser();
+  //     return this.customerCervice.getallUser();
   //   }
-  //   @Get("/:id")
+  //   @UseGuards(SessionGuard)
+  //   @Get("getCustomerById/:id")
   //   getUserByid(@Param("id" ,ParseIntPipe) id:number): any {
-  //     return this.adminService.getUserByid(id);
+  //     return this.customerCervice.getUserByid(id);
   //   }
-  //   @Get("/searchuser/:id")
+  //   @UseGuards(SessionGuard)
+  //   @Get("/searchCustomer/:id")
   //   SearchUser(@Param ("id",ParseIntPipe) id:number): any {
-  //     return this.adminService.searchUser(id);
+  //     return this.customerCervice.searchUser(id);
   //   }
   //   @Put("/updateuser/:id")
   //   @UsePipes(new ValidationPipe)
@@ -155,7 +189,5 @@ else
 
 
 }
-function moment() {
-  throw new Error('Function not implemented.');
-}
+
 

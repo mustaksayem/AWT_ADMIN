@@ -6,5 +6,8 @@ export declare class AdminService {
     constructor(adminRepo: Repository<AdminEntity>);
     Profile(): string;
     insert(adminDto: AdminDto): Promise<AdminDto & AdminEntity>;
-    signin(admindto: any): Promise<string | 0>;
+    signin(admindto: any): Promise<number>;
+    getUserByid(id: any): Promise<AdminEntity>;
+    getallUser(): any;
+    searchUser(id: any): Promise<AdminEntity>;
 }

@@ -5,59 +5,38 @@ import { AdminDto, } from '../DOTs/admin.dto';
 import { AdminEntity } from '../entitys/admin.entity';
 
 import * as bcrypt from 'bcrypt';
+import { CustomerEntity } from 'src/entitys/customer.entity';
 
 
 
 
 @Injectable()
-export class AdminService {
+export class CustomerService {
  
   constructor(
-     @InjectRepository(AdminEntity)
-      private adminRepo: Repository<AdminEntity>,
+     @InjectRepository(CustomerEntity)
+      private customerRepo: Repository<CustomerEntity>,
       
       ){}
      
-      Profile() :string {
-        return "this is the admin profile";
-      }
+     
 
 
-      async insert(adminDto :AdminDto){
-
-        const salt =await bcrypt.genSalt();
-        const hasse =await bcrypt .hash(adminDto.Password,salt);
-        adminDto.Password=hasse;
-        return this.adminRepo.save(adminDto);
-      }
-
-      async signin(admindto){
-        console.log(admindto.password);
-    const data= await this.adminRepo.findOneBy({Email: admindto.Email});
-    const isMatch= await bcrypt.compare(admindto.Password, data.Password);
-    if(isMatch) {
-    return  data.id;
     
-    }
-    else {
-        return 0;
-    }
-    
-    }
  
   
 
   //   insert(user:AdminDto) {
   //   return this.adminRepo.save(user);
   // }
-  getUserByid(id) {
-    return this.adminRepo.findOneBy({id})
+  getCustomerByid(id) {
+    return this.customerRepo.findOneBy({id})
   }
-  getallUser(  ): any {
-    return  this.adminRepo.find();
+  getallCustomer(  ): any {
+    return  this.customerRepo.find();
   }
-  searchUser(id) { 
-    return this.adminRepo.findOneBy({id})
+  searchCustomer(id) { 
+    return this.customerRepo.findOneBy({id})
   }
   // updateUSer(Name,location,id):any{
   //   return this.adminRepo.update(id,{Name:Name,location:location})

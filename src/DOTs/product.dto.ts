@@ -7,8 +7,7 @@ export class ProductDto{
     @IsNotEmpty({message:"Enter product  Name"})
     @IsString({message:"Name must be String"})
     Name:string;
-    @IsNotEmpty({message:"Enter your price "})
-    @IsNumber()
+    
     Price:number
     @IsNotEmpty({message:"Enter your Category"})
     @IsString({message:"Category must be String"})
@@ -16,6 +15,7 @@ export class ProductDto{
     @IsNotEmpty({message:"Enter your Description"})
     @IsString({message:"Description must be String"})
     Description:string
+    Image:string;
   
 
 
