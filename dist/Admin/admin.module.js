@@ -10,13 +10,14 @@ exports.AdminModule = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const admin_controller_1 = require("./admin.controller");
-const admin_entity_1 = require("./admin.entity");
-const admin_service_1 = require("./admin.service");
+const admin_entity_1 = require("../entitys/admin.entity");
+const admin_service_1 = require("../Services/admin.service");
+const customer_entity_1 = require("../entitys/customer.entity");
 let AdminModule = class AdminModule {
 };
 AdminModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([admin_entity_1.AdminEntity])],
+        imports: [typeorm_1.TypeOrmModule.forFeature([admin_entity_1.AdminEntity, customer_entity_1.CustomerEntity])],
         controllers: [admin_controller_1.AdminController],
         providers: [admin_service_1.AdminService],
     })

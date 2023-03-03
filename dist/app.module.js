@@ -9,15 +9,20 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
-const admin_entity_1 = require("./Admin/admin.entity");
+const admin_entity_1 = require("./entitys/admin.entity");
 const admin_module_1 = require("./Admin/admin.module");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
+const product_module_1 = require("./Products/product.module");
+const product_entity_1 = require("./entitys/product.entity");
+const platform_express_1 = require("@nestjs/platform-express");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [admin_module_1.AdminModule,
+        imports: [
+            platform_express_1.MulterModule.register({}),
+            admin_module_1.AdminModule, product_module_1.ProductModule,
             typeorm_1.TypeOrmModule.forRoot({
                 type: 'postgres',
                 host: 'localhost',
@@ -25,10 +30,11 @@ AppModule = __decorate([
                 username: 'postgres',
                 password: '123',
                 database: 'Admin',
-                entities: [admin_entity_1.AdminEntity],
+                entities: [admin_entity_1.AdminEntity, product_entity_1.ProductEntity],
                 autoLoadEntities: true,
                 synchronize: true,
-            }),],
+            }),
+        ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     })
