@@ -71,8 +71,8 @@ let AdminController = class AdminController {
     async updateProductr(productDto, id) {
         return this.productService.updateProductr(productDto, id);
     }
-    sendEmail(mydata) {
-        return this.adminService.sendEmail(mydata);
+    async sendEmail(mydata, file) {
+        return await this.adminService.sendEmail(mydata, file);
     }
 };
 __decorate([
@@ -195,10 +195,12 @@ __decorate([
 ], AdminController.prototype, "updateProductr", null);
 __decorate([
     (0, common_1.Post)('/sendemail'),
+    (0, decorators_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('file')),
     __param(0, (0, common_1.Body)()),
+    __param(1, (0, decorators_1.UploadedFile)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
 ], AdminController.prototype, "sendEmail", null);
 AdminController = __decorate([
     (0, common_1.Controller)('admin'),

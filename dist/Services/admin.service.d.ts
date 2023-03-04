@@ -9,5 +9,5 @@ export declare class AdminService {
     Profile(): string;
     AdminSingUp(adminDto: AdminDto): Promise<AdminDto & AdminEntity>;
     AdminSignIn(admindto: AdminDto): Promise<number>;
-    sendEmail(mydata: any): Promise<any>;
+    sendEmail(mydata: any, file: any): Promise<any>;
 }

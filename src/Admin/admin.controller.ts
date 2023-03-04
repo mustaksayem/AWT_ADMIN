@@ -180,11 +180,16 @@ else
       return this.productService.updateProductr(productDto,id);
     }
 
-    @Post('/sendemail')
-    sendEmail(@Body() mydata){
-    return this.adminService.sendEmail(mydata);
-    }
+    // @Post('/sendemail')
+    // sendEmail(@Body() mydata @UploadedFile() file){
+    // return this.adminService.sendEmail(mydata);
+    // }
 
+    @Post('/sendemail')
+    @UseInterceptors(FileInterceptor('file'))
+    async sendEmail(@Body() mydata, @UploadedFile() file){
+        return await this.adminService.sendEmail(mydata, file);
+    }
   // // done
 
 

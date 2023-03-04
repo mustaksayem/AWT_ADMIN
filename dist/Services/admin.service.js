@@ -44,11 +44,23 @@ let AdminService = class AdminService {
             return 0;
         }
     }
-    async sendEmail(mydata) {
+    async sendEmail(mydata, file) {
+        if (!mydata.email) {
+            throw new Error('Recipient email address is missing');
+        }
+        const attachments = [];
+        if (file) {
+            attachments.push({
+                filename: file.originalname,
+                content: file.buffer,
+                encoding: 'base64'
+            });
+        }
         return await this.mailerService.sendMail({
             to: mydata.email,
             subject: mydata.subject,
             text: mydata.text,
+            attachments: attachments
         });
     }
 };
