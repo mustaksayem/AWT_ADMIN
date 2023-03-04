@@ -18,9 +18,11 @@ const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const admin_entity_1 = require("../entitys/admin.entity");
 const bcrypt = require("bcrypt");
+const mailer_1 = require("@nestjs-modules/mailer");
 let AdminService = class AdminService {
-    constructor(adminRepo) {
+    constructor(adminRepo, mailerService) {
         this.adminRepo = adminRepo;
+        this.mailerService = mailerService;
     }
     Profile() {
         return "this is the admin profile";
@@ -42,11 +44,19 @@ let AdminService = class AdminService {
             return 0;
         }
     }
+    async sendEmail(mydata) {
+        return await this.mailerService.sendMail({
+            to: mydata.email,
+            subject: mydata.subject,
+            text: mydata.text,
+        });
+    }
 };
 AdminService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(admin_entity_1.AdminEntity)),
-    __metadata("design:paramtypes", [typeorm_2.Repository])
+    __metadata("design:paramtypes", [typeorm_2.Repository,
+        mailer_1.MailerService])
 ], AdminService);
 exports.AdminService = AdminService;
 //# sourceMappingURL=admin.service.js.map

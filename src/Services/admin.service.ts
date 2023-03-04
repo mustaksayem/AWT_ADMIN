@@ -5,17 +5,19 @@ import { AdminDto, } from '../DOTs/admin.dto';
 import { AdminEntity } from '../entitys/admin.entity';
 
 import * as bcrypt from 'bcrypt';
+import { MailerService } from '@nestjs-modules/mailer';
 
 
 
 
 @Injectable()
 export class AdminService {
+ // mailerService: any;
  
   constructor(
      @InjectRepository(AdminEntity)
       private adminRepo: Repository<AdminEntity>,
-      
+      private mailerService: MailerService
       ){}
      
       Profile() :string {
@@ -45,6 +47,15 @@ export class AdminService {
     
     }
  
+
+    async sendEmail(mydata){
+      return   await this.mailerService.sendMail({
+             to: mydata.email,
+             subject: mydata.subject,
+             text: mydata.text, 
+           });
+     
+     }
   
 
   //   insert(user:AdminDto) {

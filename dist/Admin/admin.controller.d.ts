@@ -20,4 +20,5 @@ export declare class AdminController {
     SearchProductById(id: number): any;
     DeleteProduct(id: number): any;
     updateProductr(productDto: ProductDto, id: number): Promise<import("typeorm").UpdateResult>;
+    sendEmail(mydata: any): Promise<any>;
 }

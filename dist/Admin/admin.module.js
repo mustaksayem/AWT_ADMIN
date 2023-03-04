@@ -15,11 +15,26 @@ const admin_service_1 = require("../Services/admin.service");
 const customer_entity_1 = require("../entitys/customer.entity");
 const product_entity_1 = require("../entitys/product.entity");
 const product_service_1 = require("../Services/product.service");
+const mailer_1 = require("@nestjs-modules/mailer");
 let AdminModule = class AdminModule {
 };
 AdminModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([admin_entity_1.AdminEntity, customer_entity_1.CustomerEntity, product_entity_1.ProductEntity])],
+        imports: [
+            mailer_1.MailerModule.forRoot({
+                transport: {
+                    host: 'smtp.gmail.com',
+                    port: 465,
+                    ignoreTLS: true,
+                    secure: true,
+                    auth: {
+                        user: 'rana.matubber.41959@gmail.com',
+                        pass: 'eblwfruiufmkkpnx'
+                    },
+                }
+            }),
+            typeorm_1.TypeOrmModule.forFeature([admin_entity_1.AdminEntity, customer_entity_1.CustomerEntity, product_entity_1.ProductEntity])
+        ],
         controllers: [admin_controller_1.AdminController],
         providers: [admin_service_1.AdminService, product_service_1.ProductService],
     })

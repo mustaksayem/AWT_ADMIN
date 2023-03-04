@@ -180,7 +180,10 @@ else
       return this.productService.updateProductr(productDto,id);
     }
 
-
+    @Post('/sendemail')
+    sendEmail(@Body() mydata){
+    return this.adminService.sendEmail(mydata);
+    }
 
   // // done
 

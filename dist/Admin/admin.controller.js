@@ -71,6 +71,9 @@ let AdminController = class AdminController {
     async updateProductr(productDto, id) {
         return this.productService.updateProductr(productDto, id);
     }
+    sendEmail(mydata) {
+        return this.adminService.sendEmail(mydata);
+    }
 };
 __decorate([
     (0, common_1.UseGuards)(session_guard_1.SessionGuard),
@@ -190,6 +193,13 @@ __decorate([
     __metadata("design:paramtypes", [product_dto_1.ProductDto, Number]),
     __metadata("design:returntype", Promise)
 ], AdminController.prototype, "updateProductr", null);
+__decorate([
+    (0, common_1.Post)('/sendemail'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], AdminController.prototype, "sendEmail", null);
 AdminController = __decorate([
     (0, common_1.Controller)('admin'),
     __metadata("design:paramtypes", [admin_service_1.AdminService,
