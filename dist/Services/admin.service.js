@@ -25,14 +25,14 @@ let AdminService = class AdminService {
     Profile() {
         return "this is the admin profile";
     }
-    async insert(adminDto) {
+    async AdminSingUp(adminDto) {
         const salt = await bcrypt.genSalt();
         const hasse = await bcrypt.hash(adminDto.Password, salt);
         adminDto.Password = hasse;
         return this.adminRepo.save(adminDto);
     }
-    async signin(admindto) {
-        console.log(admindto.password);
+    async AdminSignIn(admindto) {
+        console.log(admindto.Password);
         const data = await this.adminRepo.findOneBy({ Email: admindto.Email });
         const isMatch = await bcrypt.compare(admindto.Password, data.Password);
         if (isMatch) {
@@ -41,15 +41,6 @@ let AdminService = class AdminService {
         else {
             return 0;
         }
-    }
-    getUserByid(id) {
-        return this.adminRepo.findOneBy({ id });
-    }
-    getallUser() {
-        return this.adminRepo.find();
-    }
-    searchUser(id) {
-        return this.adminRepo.findOneBy({ id });
     }
 };
 AdminService = __decorate([

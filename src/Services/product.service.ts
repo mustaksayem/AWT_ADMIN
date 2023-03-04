@@ -1,4 +1,4 @@
-import { Body, Injectable } from '@nestjs/common';
+import { Body, Injectable, Param } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -23,25 +23,40 @@ export class ProductService {
      async AddProduct(product:ProductDto) {
     return this.productRepo.save(product);
      }
-      // getCustomerByid(id) {
-      //   return this.productRepo.findOneBy({id})
-      // }
-      // getallCustomer(  ): any {
-      //   return  this.productRepo.find();
-      // }
-      // searchCustomer(id) { 
-      //   return this.productRepo.findOneBy({id})
-      // }
+ 
+  async getProductByCategory(@Param("Category") Category: string) {
+    const products = await this.productRepo.find({ where: { Category } });
+    return products;
+  }
+ 
 
-      // async insert(adminDto :AdminDto){
+  getProductById(id: number) {
+    return this.productRepo.findOneBy({id})
+  }
+      getallProduct(): any {
+        return  this.productRepo.find();
+      }
 
-      //   const salt =await bcrypt.genSalt();
-      //   const hasse =await bcrypt .hash(adminDto.Password,salt);
-      //   adminDto.Password=hasse;
-      //   return this.adminRepo.save(adminDto);
-      // }
+ SearchProductById(id: number) {
+    return this.productRepo.findOneBy({id})
+  }
+      async SearchProductByCategory(@Param("Category") Category: string) {
+        const products = await this.productRepo.find({ where: { Category } });
+        return products;
+      }
 
-  // done
+
+      DeleteProduct(id){
+    return this.productRepo.delete(id)
+  }
+
+
+ async  updateProductr(productDto:ProductDto,id){
+    return this.productRepo.update(id,productDto)
+  }
+     
+
+  
 
 
 

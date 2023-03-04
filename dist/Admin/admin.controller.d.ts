@@ -7,10 +7,17 @@ export declare class AdminController {
     private readonly adminService;
     private readonly productService;
     constructor(adminService: AdminService, productService: ProductService);
-    getProfile(session: any): any;
-    insert(admindto: AdminDto, file: Express.Multer.File): Promise<AdminDto & import("../entitys/admin.entity").AdminEntity>;
-    signin(session: any, admindto: AdminDto): {
+    Profile(session: any): any;
+    AdminSingUp(admindto: AdminDto, file: Express.Multer.File): Promise<AdminDto & import("../entitys/admin.entity").AdminEntity>;
+    AdminSignIn(session: any, admindto: AdminDto): {
         message: string;
     };
     AddProduct(productDto: ProductDto, file: Express.Multer.File): Promise<ProductDto & import("../entitys/product.entity").ProductEntity>;
+    getallProduct(): any;
+    getProductByCategory(Category: string): any;
+    getProductById(id: number): any;
+    SearchProductByCategory(Category: string): any;
+    SearchProductById(id: number): any;
+    DeleteProduct(id: number): any;
+    updateProductr(productDto: ProductDto, id: number): Promise<import("typeorm").UpdateResult>;
 }

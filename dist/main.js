@@ -10,7 +10,7 @@ async function bootstrap() {
         resave: true,
         saveUninitialized: false,
         cookie: {
-            maxAge: 50000
+            maxAge: 100000
         }
     }));
     await app.listen(3000);

@@ -27,16 +27,16 @@ let AdminController = class AdminController {
         this.adminService = adminService;
         this.productService = productService;
     }
-    getProfile(session) {
+    Profile(session) {
         console.log(session.Email);
         return this.adminService.Profile();
     }
-    insert(admindto, file) {
+    AdminSingUp(admindto, file) {
         admindto.fileName = file.filename;
-        return this.adminService.insert(admindto);
+        return this.adminService.AdminSingUp(admindto);
     }
-    signin(session, admindto) {
-        if (this.adminService.signin(admindto)) {
+    AdminSignIn(session, admindto) {
+        if (this.adminService.AdminSignIn(admindto)) {
             session.Email = admindto.Email;
             console.log(session.Email);
             return { message: " login success" };
@@ -48,6 +48,28 @@ let AdminController = class AdminController {
     AddProduct(productDto, file) {
         productDto.Image = file.filename;
         return this.productService.AddProduct(productDto);
+        console.log(file);
+    }
+    getallProduct() {
+        return this.productService.getallProduct();
+    }
+    getProductByCategory(Category) {
+        return this.productService.getProductByCategory(Category);
+    }
+    getProductById(id) {
+        return this.productService.getProductById(id);
+    }
+    SearchProductByCategory(Category) {
+        return this.productService.SearchProductByCategory(Category);
+    }
+    SearchProductById(id) {
+        return this.productService.SearchProductById(id);
+    }
+    DeleteProduct(id) {
+        return this.productService.DeleteProduct(id);
+    }
+    async updateProductr(productDto, id) {
+        return this.productService.updateProductr(productDto, id);
     }
 };
 __decorate([
@@ -57,7 +79,7 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Object)
-], AdminController.prototype, "getProfile", null);
+], AdminController.prototype, "Profile", null);
 __decorate([
     (0, common_1.Post)('/signup'),
     (0, decorators_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('file', {
@@ -78,16 +100,17 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [admin_dto_1.AdminDto, Object]),
     __metadata("design:returntype", void 0)
-], AdminController.prototype, "insert", null);
+], AdminController.prototype, "AdminSingUp", null);
 __decorate([
-    (0, common_1.Get)('/signin'),
+    (0, common_1.Get)('/AdminSignIn'),
     __param(0, (0, decorators_1.Session)()),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, admin_dto_1.AdminDto]),
     __metadata("design:returntype", void 0)
-], AdminController.prototype, "signin", null);
+], AdminController.prototype, "AdminSignIn", null);
 __decorate([
+    (0, common_1.UseGuards)(session_guard_1.SessionGuard),
     (0, common_1.Post)("/addProduct"),
     (0, decorators_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('file', {
         storage: (0, multer_1.diskStorage)({
@@ -97,7 +120,7 @@ __decorate([
             }
         })
     })),
-    (0, common_1.UsePipes)(new common_1.ValidationPipe),
+    (0, common_1.UseGuards)(session_guard_1.SessionGuard),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, decorators_1.UploadedFile)(new common_1.ParseFilePipe({
         validators: [
@@ -109,6 +132,64 @@ __decorate([
     __metadata("design:paramtypes", [product_dto_1.ProductDto, Object]),
     __metadata("design:returntype", void 0)
 ], AdminController.prototype, "AddProduct", null);
+__decorate([
+    (0, common_1.UseGuards)(session_guard_1.SessionGuard),
+    (0, common_1.Get)("/allproduct"),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Object)
+], AdminController.prototype, "getallProduct", null);
+__decorate([
+    (0, common_1.UseGuards)(session_guard_1.SessionGuard),
+    (0, common_1.Get)("getProductByCategory/:Category"),
+    __param(0, (0, common_1.Param)("Category")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Object)
+], AdminController.prototype, "getProductByCategory", null);
+__decorate([
+    (0, common_1.UseGuards)(session_guard_1.SessionGuard),
+    (0, common_1.Get)("/getProductById/:id"),
+    __param(0, (0, common_1.Param)("id", common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Object)
+], AdminController.prototype, "getProductById", null);
+__decorate([
+    (0, common_1.UseGuards)(session_guard_1.SessionGuard),
+    (0, common_1.Get)("SearchProductByCategory/:Category"),
+    __param(0, (0, common_1.Param)("Category")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Object)
+], AdminController.prototype, "SearchProductByCategory", null);
+__decorate([
+    (0, common_1.UseGuards)(session_guard_1.SessionGuard),
+    (0, common_1.Get)("/searchProductById/:id"),
+    __param(0, (0, common_1.Param)("id", common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Object)
+], AdminController.prototype, "SearchProductById", null);
+__decorate([
+    (0, common_1.UseGuards)(session_guard_1.SessionGuard),
+    (0, common_1.Delete)("/deleteProduct/:id"),
+    (0, common_1.UsePipes)(new common_1.ValidationPipe),
+    __param(0, (0, common_1.Param)("id")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Object)
+], AdminController.prototype, "DeleteProduct", null);
+__decorate([
+    (0, common_1.UseGuards)(session_guard_1.SessionGuard),
+    (0, common_1.Put)("/updateproduct/:id"),
+    (0, common_1.UsePipes)(new common_1.ValidationPipe()),
+    __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Param)("id")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [product_dto_1.ProductDto, Number]),
+    __metadata("design:returntype", Promise)
+], AdminController.prototype, "updateProductr", null);
 AdminController = __decorate([
     (0, common_1.Controller)('admin'),
     __metadata("design:paramtypes", [admin_service_1.AdminService,

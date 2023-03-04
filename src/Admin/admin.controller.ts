@@ -24,7 +24,7 @@ export class AdminController {
   //constructor(private readonly productServices: ProductService),
   constructor(
     private readonly adminService: AdminService,
-    private readonly productService: ProductService
+   private readonly productService: ProductService
   ) { }
 
 
@@ -37,7 +37,7 @@ export class AdminController {
 
   @UseGuards(SessionGuard)
   @Get("/getindex")
-  getProfile(@Session() session ): any {
+  Profile(@Session() session ): any {
     console.log(session.Email);
     return this.adminService.Profile();
   }
@@ -53,7 +53,7 @@ export class AdminController {
       })
 
     }))
-  insert(@Body() admindto: AdminDto, @UploadedFile(new ParseFilePipe({
+    AdminSingUp(@Body() admindto: AdminDto, @UploadedFile(new ParseFilePipe({
     validators: [
       new MaxFileSizeValidator({ maxSize: 160000000 }),
       new FileTypeValidator({ fileType: 'png|jpg|jpeg|' }),
@@ -62,17 +62,17 @@ export class AdminController {
 
     admindto.fileName = file.filename;
 
-    return this.adminService.insert(admindto);
+    return this.adminService.AdminSingUp(admindto);
     //console.log(file)
   }
 
 
-  @Get('/signin')
-signin(@Session() session, @Body() admindto:AdminDto)
+  @Get('/AdminSignIn')
+AdminSignIn(@Session() session, @Body() admindto:AdminDto)
 {
 
 
-if(this.adminService.signin(admindto))
+if(this.adminService.AdminSignIn(admindto))
 {
   session.Email = admindto.Email;
 
@@ -94,7 +94,7 @@ else
 
 
 
-
+@UseGuards(SessionGuard)
     @Post("/addProduct")
     @UseInterceptors(FileInterceptor('file', 
     {
@@ -106,11 +106,11 @@ else
       })
 
     }))
-    @UsePipes(new ValidationPipe)
-    // AddProduct(@Body() product:ProductDto):any {
-    //   return this.productService.AddProduct(product);
-    // }
-
+  //  @UsePipes(new ValidationPipe)
+  //   AddProduct(@Body() product:ProductDto):any {
+  //     return this.productService.AddProduct(product);
+  //   }
+    @UseGuards(SessionGuard)
     AddProduct(@Body() productDto: ProductDto, @UploadedFile(new ParseFilePipe({
       validators: [
         new MaxFileSizeValidator({ maxSize: 160000000 }),
@@ -121,38 +121,67 @@ else
       productDto.Image = file.filename;
   
       return this.productService.AddProduct(productDto);
-      //console.log(file)
+      console.log(file)
     }
-  // @UseGuards(SessionGuard)
-  //    @Get("allcustomer")
-  //   getallUser(): any {
-  //     return this.customerCervice.getallUser();
-  //   }
-  //   @UseGuards(SessionGuard)
-  //   @Get("getCustomerById/:id")
-  //   getUserByid(@Param("id" ,ParseIntPipe) id:number): any {
-  //     return this.customerCervice.getUserByid(id);
-  //   }
-  //   @UseGuards(SessionGuard)
-  //   @Get("/searchCustomer/:id")
-  //   SearchUser(@Param ("id",ParseIntPipe) id:number): any {
-  //     return this.customerCervice.searchUser(id);
-  //   }
-  //   @Put("/updateuser/:id")
-  //   @UsePipes(new ValidationPipe)
-  //   updateUser(
 
-  //     @Body ("Name") Name:string,
-  //     @Body ("location") location:string,
-  //     @Body ("id") id:number
-  //     ):any{
-  //     return this.adminService.updateUSer(Name,location,id);
-  //   }
-  //   @Delete("/deleteuser/:id")
-  //   deleteUserById(@Param ("id") id:number):any{
-  //     return this.adminService.deleteUserById(id);
 
-  //   }
+    @UseGuards(SessionGuard)
+     @Get("/allproduct")
+     getallProduct(): any {
+      return this.productService.getallProduct();
+    }
+    @UseGuards(SessionGuard)
+    @Get("getProductByCategory/:Category")
+    getProductByCategory(@Param("Category"  ) Category:string): any {
+      return this.productService.getProductByCategory(Category);
+    }
+    @UseGuards(SessionGuard)
+    @Get("/getProductById/:id")
+    getProductById(@Param ("id",ParseIntPipe) id:number): any {
+      return this.productService.getProductById(id);
+    }
+
+
+
+    @UseGuards(SessionGuard)
+    @Get("SearchProductByCategory/:Category")
+    SearchProductByCategory(@Param("Category"  ) Category:string): any {
+      return this.productService.SearchProductByCategory(Category);
+    }
+
+
+   @UseGuards(SessionGuard)
+    @Get("/searchProductById/:id")
+    SearchProductById(@Param ("id",ParseIntPipe) id:number): any {
+      return this.productService.SearchProductById(id);
+    }
+
+
+
+    @UseGuards(SessionGuard)
+    @Delete("/deleteProduct/:id")
+    @UsePipes(new ValidationPipe)
+    DeleteProduct(@Param ("id") id:number):any{
+      return this.productService.DeleteProduct(id);
+
+    }
+
+
+
+    @UseGuards(SessionGuard)
+    @Put("/updateproduct/:id")
+   @UsePipes(new ValidationPipe()) 
+   async  updateProductr(
+
+      @Body () productDto:ProductDto,
+      @Param("id") id:number
+     
+      ){
+      return this.productService.updateProductr(productDto,id);
+    }
+
+
+
   // // done
 
 

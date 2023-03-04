@@ -23,7 +23,7 @@ export class AdminService {
       }
 
 
-      async insert(adminDto :AdminDto){
+      async AdminSingUp(adminDto :AdminDto){
 
         const salt =await bcrypt.genSalt();
         const hasse =await bcrypt .hash(adminDto.Password,salt);
@@ -31,8 +31,8 @@ export class AdminService {
         return this.adminRepo.save(adminDto);
       }
 
-      async signin(admindto){
-        console.log(admindto.password);
+      async AdminSignIn(admindto:AdminDto){
+        console.log(admindto.Password);
     const data= await this.adminRepo.findOneBy({Email: admindto.Email});
     const isMatch= await bcrypt.compare(admindto.Password, data.Password);
     if(isMatch) {
@@ -50,15 +50,15 @@ export class AdminService {
   //   insert(user:AdminDto) {
   //   return this.adminRepo.save(user);
   // }
-  getUserByid(id) {
-    return this.adminRepo.findOneBy({id})
-  }
-  getallUser(  ): any {
-    return  this.adminRepo.find();
-  }
-  searchUser(id) { 
-    return this.adminRepo.findOneBy({id})
-  }
+  // getUserByid(id) {
+  //   return this.adminRepo.findOneBy({id})
+  // }
+  // getallUser(  ): any {
+  //   return  this.adminRepo.find();
+  // }
+  // searchUser(id) { 
+  //   return this.adminRepo.findOneBy({id})
+  // }
   // updateUSer(Name,location,id):any{
   //   return this.adminRepo.update(id,{Name:Name,location:location})
   // }

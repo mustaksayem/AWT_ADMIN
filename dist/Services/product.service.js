@@ -24,7 +24,42 @@ let ProductService = class ProductService {
     async AddProduct(product) {
         return this.productRepo.save(product);
     }
+    async getProductByCategory(Category) {
+        const products = await this.productRepo.find({ where: { Category } });
+        return products;
+    }
+    getProductById(id) {
+        return this.productRepo.findOneBy({ id });
+    }
+    getallProduct() {
+        return this.productRepo.find();
+    }
+    SearchProductById(id) {
+        return this.productRepo.findOneBy({ id });
+    }
+    async SearchProductByCategory(Category) {
+        const products = await this.productRepo.find({ where: { Category } });
+        return products;
+    }
+    DeleteProduct(id) {
+        return this.productRepo.delete(id);
+    }
+    async updateProductr(productDto, id) {
+        return this.productRepo.update(id, productDto);
+    }
 };
+__decorate([
+    __param(0, (0, common_1.Param)("Category")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], ProductService.prototype, "getProductByCategory", null);
+__decorate([
+    __param(0, (0, common_1.Param)("Category")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], ProductService.prototype, "SearchProductByCategory", null);
 ProductService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(product_entity_1.ProductEntity)),
