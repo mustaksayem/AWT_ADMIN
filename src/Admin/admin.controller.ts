@@ -83,7 +83,7 @@ else
  
 }
 
- //@UseGuards(SessionGuard)
+ @UseGuards(SessionGuard)
 @Get("/getAdminById/:id")
 getAdminById(@Param ("id",ParseIntPipe) id:number): any {
   return this.adminService.getAdminById(id);
@@ -98,7 +98,7 @@ getAdminById(@Param ("id",ParseIntPipe) id:number): any {
       return this.adminService.DeleteAdmin(id);
 
     }
-
+    @UseGuards(SessionGuard)
     @Put("/update/:id")
     @UsePipes(new ValidationPipe())
     async update(@Body() admindto: AdminDto, @Param('id') id: number) {

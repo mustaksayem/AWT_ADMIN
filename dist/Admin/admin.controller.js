@@ -137,6 +137,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], AdminController.prototype, "AdminSignIn", null);
 __decorate([
+    (0, common_1.UseGuards)(session_guard_1.SessionGuard),
     (0, common_1.Get)("/getAdminById/:id"),
     __param(0, (0, common_1.Param)("id", common_1.ParseIntPipe)),
     __metadata("design:type", Function),
@@ -153,6 +154,7 @@ __decorate([
     __metadata("design:returntype", Object)
 ], AdminController.prototype, "DeleteAdmin", null);
 __decorate([
+    (0, common_1.UseGuards)(session_guard_1.SessionGuard),
     (0, common_1.Put)("/update/:id"),
     (0, common_1.UsePipes)(new common_1.ValidationPipe()),
     __param(0, (0, common_1.Body)()),
