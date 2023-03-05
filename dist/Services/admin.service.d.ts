@@ -9,5 +9,8 @@ export declare class AdminService {
     Profile(): string;
     AdminSingUp(adminDto: AdminDto): Promise<AdminDto & AdminEntity>;
     AdminSignIn(admindto: AdminDto): Promise<number>;
+    update(adminDto: AdminDto, id: any): Promise<import("typeorm").UpdateResult>;
     sendEmail(mydata: any, file: any): Promise<any>;
+    getAdminById(id: any): Promise<AdminEntity>;
+    DeleteAdmin(id: any): Promise<import("typeorm").DeleteResult>;
 }

@@ -4,5 +4,5 @@ export declare class CustomerDto {
     Number: string;
     Location: string;
     Password: string;
-    Emial: string;
+    Email: string;
 }

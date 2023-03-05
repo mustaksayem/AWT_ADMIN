@@ -20,7 +20,6 @@ __decorate([
 ], CustomerDto.prototype, "Name", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)({ message: "Enter your naem" }),
-    (0, class_validator_1.IsNumber)(),
     __metadata("design:type", String)
 ], CustomerDto.prototype, "Number", void 0);
 __decorate([
@@ -34,9 +33,8 @@ __decorate([
     __metadata("design:type", String)
 ], CustomerDto.prototype, "Password", void 0);
 __decorate([
-    (0, class_validator_1.IsNotEmpty)({ message: "Enter your email" }),
-    (0, class_validator_1.IsString)({ message: "Email must be String" }),
+    (0, class_validator_1.IsEmail)(),
     __metadata("design:type", String)
-], CustomerDto.prototype, "Emial", void 0);
+], CustomerDto.prototype, "Email", void 0);
 exports.CustomerDto = CustomerDto;
 //# sourceMappingURL=customer.dto.js.map

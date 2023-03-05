@@ -17,15 +17,18 @@ const common_1 = require("@nestjs/common");
 const decorators_1 = require("@nestjs/common/decorators");
 const platform_express_1 = require("@nestjs/platform-express");
 const admin_dto_1 = require("../DOTs/admin.dto");
+const customer_dto_1 = require("../DOTs/customer.dto");
 const admin_service_1 = require("../Services/admin.service");
 const session_guard_1 = require("./session.guard");
 const multer_1 = require("multer");
+const customer_service_1 = require("../Services/customer.service");
 const product_dto_1 = require("../DOTs/product.dto");
 const product_service_1 = require("../Services/product.service");
 let AdminController = class AdminController {
-    constructor(adminService, productService) {
+    constructor(adminService, productService, customerService) {
         this.adminService = adminService;
         this.productService = productService;
+        this.customerService = customerService;
     }
     Profile(session) {
         console.log(session.Email);
@@ -44,6 +47,15 @@ let AdminController = class AdminController {
         else {
             return { message: "login  faild" };
         }
+    }
+    getAdminById(id) {
+        return this.adminService.getAdminById(id);
+    }
+    DeleteAdmin(id) {
+        return this.adminService.DeleteAdmin(id);
+    }
+    async update(admindto, id) {
+        return this.adminService.update(admindto, id);
     }
     AddProduct(productDto, file) {
         productDto.Image = file.filename;
@@ -73,6 +85,18 @@ let AdminController = class AdminController {
     }
     async sendEmail(mydata, file) {
         return await this.adminService.sendEmail(mydata, file);
+    }
+    addcustomer(dto) {
+        return this.customerService.addcustomer(dto);
+    }
+    getCustomerByid(id) {
+        return this.customerService.getCustomerByid(id);
+    }
+    async updateCustomer(Dto, id) {
+        return this.customerService.updateCustomer(Dto, id);
+    }
+    DeleteCustomer(id) {
+        return this.customerService.DeleteCustomer(id);
     }
 };
 __decorate([
@@ -112,6 +136,31 @@ __decorate([
     __metadata("design:paramtypes", [Object, admin_dto_1.AdminDto]),
     __metadata("design:returntype", void 0)
 ], AdminController.prototype, "AdminSignIn", null);
+__decorate([
+    (0, common_1.Get)("/getAdminById/:id"),
+    __param(0, (0, common_1.Param)("id", common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Object)
+], AdminController.prototype, "getAdminById", null);
+__decorate([
+    (0, common_1.UseGuards)(session_guard_1.SessionGuard),
+    (0, common_1.Delete)("/deleteAdmin/:id"),
+    (0, common_1.UsePipes)(new common_1.ValidationPipe),
+    __param(0, (0, common_1.Param)("id")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Object)
+], AdminController.prototype, "DeleteAdmin", null);
+__decorate([
+    (0, common_1.Put)("/update/:id"),
+    (0, common_1.UsePipes)(new common_1.ValidationPipe()),
+    __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [admin_dto_1.AdminDto, Number]),
+    __metadata("design:returntype", Promise)
+], AdminController.prototype, "update", null);
 __decorate([
     (0, common_1.UseGuards)(session_guard_1.SessionGuard),
     (0, common_1.Post)("/addProduct"),
@@ -194,6 +243,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], AdminController.prototype, "updateProductr", null);
 __decorate([
+    (0, common_1.UseGuards)(session_guard_1.SessionGuard),
     (0, common_1.Post)('/sendemail'),
     (0, decorators_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('file')),
     __param(0, (0, common_1.Body)()),
@@ -202,10 +252,46 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], AdminController.prototype, "sendEmail", null);
+__decorate([
+    (0, common_1.UseGuards)(session_guard_1.SessionGuard),
+    (0, common_1.Post)("/addcustomer"),
+    (0, common_1.UsePipes)(new common_1.ValidationPipe()),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [customer_dto_1.CustomerDto]),
+    __metadata("design:returntype", Object)
+], AdminController.prototype, "addcustomer", null);
+__decorate([
+    (0, common_1.UseGuards)(session_guard_1.SessionGuard),
+    (0, common_1.Get)("getcustomerbyid/:id"),
+    __param(0, (0, common_1.Param)("id")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Object)
+], AdminController.prototype, "getCustomerByid", null);
+__decorate([
+    (0, common_1.UseGuards)(session_guard_1.SessionGuard),
+    (0, common_1.Put)("/updatecustomer/:id"),
+    (0, common_1.UsePipes)(new common_1.ValidationPipe()),
+    __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Param)("id")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [customer_dto_1.CustomerDto, Number]),
+    __metadata("design:returntype", Promise)
+], AdminController.prototype, "updateCustomer", null);
+__decorate([
+    (0, common_1.UseGuards)(session_guard_1.SessionGuard),
+    (0, common_1.Delete)("/deletecustomer/:id"),
+    __param(0, (0, common_1.Param)("id")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Object)
+], AdminController.prototype, "DeleteCustomer", null);
 AdminController = __decorate([
     (0, common_1.Controller)('admin'),
     __metadata("design:paramtypes", [admin_service_1.AdminService,
-        product_service_1.ProductService])
+        product_service_1.ProductService,
+        customer_service_1.CustomerService])
 ], AdminController);
 exports.AdminController = AdminController;
 //# sourceMappingURL=admin.controller.js.map

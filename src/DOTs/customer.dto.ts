@@ -1,4 +1,4 @@
-import {  IsNotEmpty, IsNumber, IsString, MaxLength, MinLength} from "class-validator";
+import {  IsEmail, IsNotEmpty, IsNumber, IsString, MaxLength, MinLength} from "class-validator";
 
 
 
@@ -8,7 +8,6 @@ export class CustomerDto{
     @IsString({message:"Name must be String"})
     Name:string;
     @IsNotEmpty({message:"Enter your naem"})
-    @IsNumber()
     Number:string
     @IsNotEmpty({message:"Enter your Locatoon"})
     @IsString({message:"Location must be String"})
@@ -16,9 +15,8 @@ export class CustomerDto{
     @IsNotEmpty({message:"Enter your Password"})
     @IsString({message:"Password must be String"})
     Password:string
-    @IsNotEmpty({message:"Enter your email"})
-    @IsString({message:"Email must be String"})
-    Emial:string
+    @IsEmail()
+    Email:string
 
 
 }

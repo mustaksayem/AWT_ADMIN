@@ -16,7 +16,7 @@ class AdminDto {
 __decorate([
     (0, class_validator_1.IsString)({ message: "name must be string" }),
     (0, class_validator_1.IsNotEmpty)({ message: "enter your name" }),
-    (0, class_validator_1.MaxLength)(10, { message: "nmae max length is 10" }),
+    (0, class_validator_1.MaxLength)(100, { message: "nmae max length is 10" }),
     (0, class_validator_1.MinLength)(3, { message: "name Min length is 3" }),
     __metadata("design:type", String)
 ], AdminDto.prototype, "Name", void 0);

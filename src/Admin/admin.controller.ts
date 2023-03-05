@@ -24,16 +24,12 @@ export class AdminController {
   //constructor(private readonly productServices: ProductService),
   constructor(
     private readonly adminService: AdminService,
-   private readonly productService: ProductService
+   private readonly productService: ProductService,
+   private readonly customerService :CustomerService
   ) { }
 
 
-  // @UseGuards(SessionGuard)
-  // @Get("/index")
-  // getAdmin(@Session() session): any {
-  //   console.log(session.agencyid);
-  //   return this.agencyService.getIndex();
-  // }
+// admin part
 
   @UseGuards(SessionGuard)
   @Get("/getindex")
@@ -87,12 +83,41 @@ else
  
 }
 
+ //@UseGuards(SessionGuard)
+@Get("/getAdminById/:id")
+getAdminById(@Param ("id",ParseIntPipe) id:number): any {
+  return this.adminService.getAdminById(id);
+}
+    
+
+
+    @UseGuards(SessionGuard)
+    @Delete("/deleteAdmin/:id")
+    @UsePipes(new ValidationPipe)
+    DeleteAdmin(@Param ("id") id:number):any{
+      return this.adminService.DeleteAdmin(id);
+
+    }
+
+    @Put("/update/:id")
+    @UsePipes(new ValidationPipe())
+    async update(@Body() admindto: AdminDto, @Param('id') id: number) {
+      return this.adminService.update(admindto, id);
+    }
 
 
 
 
 
 
+ 
+
+
+
+
+
+
+                  //// product part   /////
 
 @UseGuards(SessionGuard)
     @Post("/addProduct")
@@ -106,10 +131,6 @@ else
       })
 
     }))
-  //  @UsePipes(new ValidationPipe)
-  //   AddProduct(@Body() product:ProductDto):any {
-  //     return this.productService.AddProduct(product);
-  //   }
     @UseGuards(SessionGuard)
     AddProduct(@Body() productDto: ProductDto, @UploadedFile(new ParseFilePipe({
       validators: [
@@ -180,47 +201,65 @@ else
       return this.productService.updateProductr(productDto,id);
     }
 
-    // @Post('/sendemail')
-    // sendEmail(@Body() mydata @UploadedFile() file){
-    // return this.adminService.sendEmail(mydata);
-    // }
+   
 
+    @UseGuards(SessionGuard)
     @Post('/sendemail')
     @UseInterceptors(FileInterceptor('file'))
     async sendEmail(@Body() mydata, @UploadedFile() file){
         return await this.adminService.sendEmail(mydata, file);
     }
-  // // done
+  
 
 
-  //   @Post("/addcustomer")
-  //   @UsePipes(new ValidationPipe)
-  //   addcustomer(@Body() dto:CustomerDto):any {
-  //     return this.adminService.addcustomer(dto);
-  //   }
+
+                                  ///// customer start  
+
+ @UseGuards(SessionGuard)
+    @Post("/addcustomer")
+    @UsePipes(new ValidationPipe())
+    addcustomer(@Body() dto:CustomerDto):any {
+      return this.customerService.addcustomer(dto);
+    }
 
 
-  //   // @Get("/:number")
-  //   // getcustomer(@Param("number") number:string): any {
-  //   //   return this.adminService.getUser(number);
-  //   // }
-  //   @Get("/searchcustomer/:number")
-  //   Searccustomer(@Param ("number") number:string): string {
-  //     return this.adminService.searchcustomer(number);
-  //   }
-  //   @Put("/updatecustomer/:number")
-  //   updatecustomer(@Param ("number") number:string):string{
-  //     return this.adminService.updatecustomer(number);
-  //   }
-  //   @Delete("/deletecustomer/:number")
-  //   deltetecustomer(@Param ("number") number:string):string{
-  //     return this.adminService.deletecustomer(number);
+    @UseGuards(SessionGuard)
+    @Get("getcustomerbyid/:id")
+    getCustomerByid(@Param("id") id:number): any {
+      return this.customerService.getCustomerByid(id);
+    }
 
-  //   }
-  //   @Get("/customerexit/:id")
-  //   customerExit(@Param ("id" ,ParseBoolPipe) id:number): any{
-  //     return this.adminService.customerExit(id)
-  //   }
+
+
+
+    @UseGuards(SessionGuard)
+    @Put("/updatecustomer/:id")
+    @UsePipes(new ValidationPipe()) 
+    async  updateCustomer(
+       @Body () Dto:CustomerDto,
+       @Param("id") id:number
+      
+       ){
+       return this.customerService.updateCustomer(Dto,id);
+     }
+
+
+     @UseGuards(SessionGuard)
+       @Delete("/deletecustomer/:id")
+       DeleteCustomer(@Param ("id") id:number):any{
+      return this.customerService.DeleteCustomer(id);
+
+    }
+
+   
+
+    
+
+
+
+
+
+
 
 
 

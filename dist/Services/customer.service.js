@@ -21,14 +21,23 @@ let CustomerService = class CustomerService {
     constructor(customerRepo) {
         this.customerRepo = customerRepo;
     }
+    addcustomer(user) {
+        return this.customerRepo.save(user);
+    }
     getCustomerByid(id) {
         return this.customerRepo.findOneBy({ id });
+    }
+    getCustomerByNumber(Number) {
+        return this.customerRepo.findOneBy({ Number });
     }
     getallCustomer() {
         return this.customerRepo.find();
     }
-    searchCustomer(id) {
-        return this.customerRepo.findOneBy({ id });
+    async updateCustomer(Dto, id) {
+        return this.customerRepo.update(id, Dto);
+    }
+    DeleteCustomer(id) {
+        return this.customerRepo.delete(id);
     }
 };
 CustomerService = __decorate([

@@ -6,12 +6,16 @@ import { AdminEntity } from '../entitys/admin.entity';
 
 import * as bcrypt from 'bcrypt';
 import { MailerService } from '@nestjs-modules/mailer';
+import { CustomerDto } from 'src/DOTs/customer.dto';
 
 
 
 
 @Injectable()
 export class AdminService {
+  // addcustomer(dto: CustomerDto): any {
+  //   throw new Error('Method not implemented.');
+  // }
  // mailerService: any;
  
   constructor(
@@ -46,6 +50,15 @@ export class AdminService {
     }
     
     }
+
+
+    async update(adminDto: AdminDto, id) {
+
+      const salt =await bcrypt.genSalt();
+        const hasse =await bcrypt .hash(adminDto.Password,salt);
+        adminDto.Password = hasse;
+      return this.adminRepo.update(id, adminDto);
+  }
  
 
     // async sendEmail(mydata,file){
@@ -84,6 +97,20 @@ export class AdminService {
       });
     }
 
+  //     deleteAdminById(id){
+  //   return this.adminRepo.delete(id)
+  // }
+
+  getAdminById(id) { 
+    return this.adminRepo.findOneBy({id})
+  }
+
+
+  DeleteAdmin(id){
+    return this.adminRepo.delete(id)
+  }
+
+
   //   insert(user:AdminDto) {
   //   return this.adminRepo.save(user);
   // }
@@ -98,9 +125,6 @@ export class AdminService {
   // }
   // updateUSer(Name,location,id):any{
   //   return this.adminRepo.update(id,{Name:Name,location:location})
-  // }
-  // deleteUserById(id){
-  //   return this.adminRepo.delete(id)
   // }
 
   // // done

@@ -6,6 +6,7 @@ import { AdminEntity } from '../entitys/admin.entity';
 
 import * as bcrypt from 'bcrypt';
 import { CustomerEntity } from 'src/entitys/customer.entity';
+import { CustomerDto } from 'src/DOTs/customer.dto';
 
 
 
@@ -25,22 +26,29 @@ export class CustomerService {
     
  
   
+addcustomer(user:CustomerDto) {
+        return this.customerRepo.save(user);
+ }    
 
-  //   insert(user:AdminDto) {
-  //   return this.adminRepo.save(user);
-  // }
   getCustomerByid(id) {
     return this.customerRepo.findOneBy({id})
+  }
+
+  getCustomerByNumber(Number) {
+    return this.customerRepo.findOneBy({Number})
   }
   getallCustomer(  ): any {
     return  this.customerRepo.find();
   }
-  searchCustomer(id) { 
-    return this.customerRepo.findOneBy({id})
+
+  async  updateCustomer(Dto:CustomerDto,id){
+    return this.customerRepo.update(id,Dto)
   }
-  // updateUSer(Name,location,id):any{
-  //   return this.adminRepo.update(id,{Name:Name,location:location})
-  // }
+
+  DeleteCustomer(id){
+    return this.customerRepo.delete(id)
+  }
+     
   // deleteUserById(id){
   //   return this.adminRepo.delete(id)
   // }
@@ -49,6 +57,7 @@ export class CustomerService {
 
 
 
+  
   // addcustomer(add:CustomerDto):any{
   //   return "Name is :"+add.Name+"  and Numbner is : " + add.Number;
 
@@ -64,9 +73,7 @@ export class CustomerService {
   // updatecustomer(number):any{
   //   return 
   // }
-  // deletecustomer(number):any{
-  //   return "delete customer "+number;
-  // }
+ 
 
   // customerExit(id):any{
   //   if(id==true) return "Customer Exit"

@@ -7,7 +7,7 @@ export class AdminDto{
 
     @IsString({message:"name must be string"})
     @IsNotEmpty({message:"enter your name"})
-    @MaxLength(10,{message:"nmae max length is 10"})
+    @MaxLength(100,{message:"nmae max length is 10"})
     @MinLength(3,{message:"name Min length is 3"})
     Name:string;
 
@@ -18,7 +18,7 @@ export class AdminDto{
     @IsString({message:"Location must be String"})
     location:string;
     fileName: string;
-  static Name: string;
+     static Name: string;
 
 
 }

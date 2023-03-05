@@ -44,6 +44,12 @@ let AdminService = class AdminService {
             return 0;
         }
     }
+    async update(adminDto, id) {
+        const salt = await bcrypt.genSalt();
+        const hasse = await bcrypt.hash(adminDto.Password, salt);
+        adminDto.Password = hasse;
+        return this.adminRepo.update(id, adminDto);
+    }
     async sendEmail(mydata, file) {
         if (!mydata.email) {
             throw new Error('Recipient email address is missing');
@@ -62,6 +68,12 @@ let AdminService = class AdminService {
             text: mydata.text,
             attachments: attachments
         });
+    }
+    getAdminById(id) {
+        return this.adminRepo.findOneBy({ id });
+    }
+    DeleteAdmin(id) {
+        return this.adminRepo.delete(id);
     }
 };
 AdminService = __decorate([
