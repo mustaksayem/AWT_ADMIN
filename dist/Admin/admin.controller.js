@@ -245,7 +245,6 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], AdminController.prototype, "updateProductr", null);
 __decorate([
-    (0, common_1.UseGuards)(session_guard_1.SessionGuard),
     (0, common_1.Post)('/sendemail'),
     (0, decorators_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('file')),
     __param(0, (0, common_1.Body)()),

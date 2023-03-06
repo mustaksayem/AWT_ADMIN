@@ -203,7 +203,7 @@ getAdminById(@Param ("id",ParseIntPipe) id:number): any {
 
    
 
-    @UseGuards(SessionGuard)
+    //@UseGuards(SessionGuard)
     @Post('/sendemail')
     @UseInterceptors(FileInterceptor('file'))
     async sendEmail(@Body() mydata, @UploadedFile() file){
