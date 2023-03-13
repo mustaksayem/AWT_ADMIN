@@ -1,4 +1,5 @@
 import { BaseEntity } from "typeorm";
+import { ProductEntity } from "./product.entity";
 export declare class AdminEntity extends BaseEntity {
     id: number;
     Name: string;
@@ -6,4 +7,5 @@ export declare class AdminEntity extends BaseEntity {
     Password: string;
     location: string;
     fileName: string;
+    productEntity: ProductEntity[];
 }

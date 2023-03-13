@@ -16,6 +16,8 @@ export class ProductDto{
     @IsString({message:"Description must be String"})
     Description:string
     Image:string;
+
+    AdminId:number
   
 
 

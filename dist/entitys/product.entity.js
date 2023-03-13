@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductEntity = void 0;
 const typeorm_1 = require("typeorm");
+const admin_entity_1 = require("./admin.entity");
 let ProductEntity = class ProductEntity extends typeorm_1.BaseEntity {
 };
 __decorate([
@@ -37,8 +38,12 @@ __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", String)
 ], ProductEntity.prototype, "Image", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => admin_entity_1.AdminEntity, (Admin) => Admin.productEntity),
+    __metadata("design:type", admin_entity_1.AdminEntity)
+], ProductEntity.prototype, "Admin", void 0);
 ProductEntity = __decorate([
-    (0, typeorm_1.Entity)("Products")
+    (0, typeorm_1.Entity)("Transportation")
 ], ProductEntity);
 exports.ProductEntity = ProductEntity;
 //# sourceMappingURL=product.entity.js.map

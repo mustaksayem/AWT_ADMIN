@@ -1,6 +1,7 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { AdminEntity } from "./admin.entity";
 
-@Entity("Products")
+@Entity("Transportation")
 export class ProductEntity extends BaseEntity{
 
     @PrimaryGeneratedColumn()
@@ -17,8 +18,10 @@ export class ProductEntity extends BaseEntity{
     Description:string
     @Column({ nullable: true })
     Image:string
-    
 
+    @ManyToOne(() => AdminEntity, (Admin) => Admin.productEntity)
+     Admin: AdminEntity
+    
 
 }
 

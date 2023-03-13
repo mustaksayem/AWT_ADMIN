@@ -5,4 +5,5 @@ export declare class ProductDto {
     Category: string;
     Description: string;
     Image: string;
+    AdminId: number;
 }

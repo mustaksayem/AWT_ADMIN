@@ -75,6 +75,9 @@ let AdminService = class AdminService {
     DeleteAdmin(id) {
         return this.adminRepo.delete(id);
     }
+    FindTransprotationByAdminId(id) {
+        return this.adminRepo.find(({ where: { id: id }, relations: { productEntity: true, }, }));
+    }
 };
 AdminService = __decorate([
     (0, common_1.Injectable)(),

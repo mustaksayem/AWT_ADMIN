@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AdminEntity = void 0;
 const typeorm_1 = require("typeorm");
+const product_entity_1 = require("./product.entity");
 let AdminEntity = class AdminEntity extends typeorm_1.BaseEntity {
 };
 __decorate([
@@ -37,6 +38,10 @@ __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", String)
 ], AdminEntity.prototype, "fileName", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => product_entity_1.ProductEntity, (productEntity) => productEntity.Admin),
+    __metadata("design:type", Array)
+], AdminEntity.prototype, "productEntity", void 0);
 AdminEntity = __decorate([
     (0, typeorm_1.Entity)("Admin_table")
 ], AdminEntity);

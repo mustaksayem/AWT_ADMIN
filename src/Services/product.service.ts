@@ -12,6 +12,9 @@ import { ProductDto } from 'src/DOTs/product.dto';
 
 @Injectable()
 export class ProductService {
+  FindTransprotationByAdminId(id: number): any {
+    throw new Error('Method not implemented.');
+  }
  
   constructor(
      @InjectRepository(ProductEntity)
@@ -28,7 +31,11 @@ export class ProductService {
     const products = await this.productRepo.find({ where: { Category } });
     return products;
   }
- 
+  // async getProductByFkid(@Param("AdminId") AdminId: number) {
+  //   const products = await this.productRepo.find({ where: { AdminId } });
+  //   return products;
+  // }
+
 
   getProductById(id: number) {
     return this.productRepo.findOneBy({id})

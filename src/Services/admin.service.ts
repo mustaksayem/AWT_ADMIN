@@ -109,7 +109,8 @@ export class AdminService {
   DeleteAdmin(id){
     return this.adminRepo.delete(id)
   }
-
+  FindTransprotationByAdminId(id): any {
+    return this.adminRepo.find(({where: { id: id },relations: {productEntity: true,},}))}
 
   //   insert(user:AdminDto) {
   //   return this.adminRepo.save(user);

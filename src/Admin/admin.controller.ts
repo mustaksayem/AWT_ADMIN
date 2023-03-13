@@ -110,7 +110,10 @@ getAdminById(@Param ("id",ParseIntPipe) id:number): any {
 
 
 
- 
+    // @Get("/Transprotation/view/:id") 
+    //  GetBudgetReqById(@Param("id", ParseIntPipe) id: number): any {
+    //     return this.productService.get(id);
+    //    }
 
 
 
@@ -119,7 +122,7 @@ getAdminById(@Param ("id",ParseIntPipe) id:number): any {
 
                   //// product part   /////
 
-@UseGuards(SessionGuard)
+
     @Post("/addProduct")
     @UseInterceptors(FileInterceptor('file', 
     {
@@ -131,7 +134,7 @@ getAdminById(@Param ("id",ParseIntPipe) id:number): any {
       })
 
     }))
-    @UseGuards(SessionGuard)
+    
     AddProduct(@Body() productDto: ProductDto, @UploadedFile(new ParseFilePipe({
       validators: [
         new MaxFileSizeValidator({ maxSize: 160000000 }),
@@ -146,17 +149,20 @@ getAdminById(@Param ("id",ParseIntPipe) id:number): any {
     }
 
 
-    @UseGuards(SessionGuard)
      @Get("/allproduct")
      getallProduct(): any {
       return this.productService.getallProduct();
     }
-    @UseGuards(SessionGuard)
+  
     @Get("getProductByCategory/:Category")
     getProductByCategory(@Param("Category"  ) Category:string): any {
       return this.productService.getProductByCategory(Category);
     }
-    @UseGuards(SessionGuard)
+    // @Get("getProductByCategory/:AdminId")
+    // getProductByFkid(@Param("AdminId"  ) AdminId:number): any {
+    //   return this.productService.getProductByFkid(AdminId);
+    // }
+
     @Get("/getProductById/:id")
     getProductById(@Param ("id",ParseIntPipe) id:number): any {
       return this.productService.getProductById(id);
@@ -164,22 +170,25 @@ getAdminById(@Param ("id",ParseIntPipe) id:number): any {
 
 
 
-    @UseGuards(SessionGuard)
+    
     @Get("SearchProductByCategory/:Category")
     SearchProductByCategory(@Param("Category"  ) Category:string): any {
       return this.productService.SearchProductByCategory(Category);
     }
 
 
-   @UseGuards(SessionGuard)
     @Get("/searchProductById/:id")
     SearchProductById(@Param ("id",ParseIntPipe) id:number): any {
       return this.productService.SearchProductById(id);
     }
 
+@Get("/TransprotationByAdminId/:id")
+FindTransprotationByAdminId(@Param ("id",ParseIntPipe) id:number): any {
+      return this.adminService.FindTransprotationByAdminId(id);
+    }
 
 
-    @UseGuards(SessionGuard)
+   
     @Delete("/deleteProduct/:id")
     @UsePipes(new ValidationPipe)
     DeleteProduct(@Param ("id") id:number):any{
@@ -189,7 +198,6 @@ getAdminById(@Param ("id",ParseIntPipe) id:number): any {
 
 
 
-    @UseGuards(SessionGuard)
     @Put("/updateproduct/:id")
    @UsePipes(new ValidationPipe()) 
    async  updateProductr(
@@ -215,7 +223,7 @@ getAdminById(@Param ("id",ParseIntPipe) id:number): any {
 
                                   ///// customer start  
 
- @UseGuards(SessionGuard)
+ 
     @Post("/addcustomer")
     @UsePipes(new ValidationPipe())
     addcustomer(@Body() dto:CustomerDto):any {
@@ -223,7 +231,7 @@ getAdminById(@Param ("id",ParseIntPipe) id:number): any {
     }
 
 
-    @UseGuards(SessionGuard)
+ 
     @Get("getcustomerbyid/:id")
     getCustomerByid(@Param("id") id:number): any {
       return this.customerService.getCustomerByid(id);
@@ -232,7 +240,7 @@ getAdminById(@Param ("id",ParseIntPipe) id:number): any {
 
 
 
-    @UseGuards(SessionGuard)
+   
     @Put("/updatecustomer/:id")
     @UsePipes(new ValidationPipe()) 
     async  updateCustomer(
@@ -244,7 +252,7 @@ getAdminById(@Param ("id",ParseIntPipe) id:number): any {
      }
 
 
-     @UseGuards(SessionGuard)
+    
        @Delete("/deletecustomer/:id")
        DeleteCustomer(@Param ("id") id:number):any{
       return this.customerService.DeleteCustomer(id);

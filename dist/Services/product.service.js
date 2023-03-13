@@ -18,6 +18,9 @@ const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const product_entity_1 = require("../entitys/product.entity");
 let ProductService = class ProductService {
+    FindTransprotationByAdminId(id) {
+        throw new Error('Method not implemented.');
+    }
     constructor(productRepo) {
         this.productRepo = productRepo;
     }

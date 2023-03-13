@@ -1,4 +1,5 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { ProductEntity } from "./product.entity";
 
 @Entity("Admin_table")
 export class AdminEntity extends BaseEntity {
@@ -15,8 +16,9 @@ export class AdminEntity extends BaseEntity {
     location: string
     @Column({ nullable: true })
     fileName: string
-
     //hello
+    @OneToMany(() => ProductEntity, (productEntity) => productEntity.Admin)
+    productEntity: ProductEntity[]
 }
 
 

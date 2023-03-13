@@ -13,4 +13,5 @@ export declare class AdminService {
     sendEmail(mydata: any, file: any): Promise<any>;
     getAdminById(id: any): Promise<AdminEntity>;
     DeleteAdmin(id: any): Promise<import("typeorm").DeleteResult>;
+    FindTransprotationByAdminId(id: any): any;
 }
